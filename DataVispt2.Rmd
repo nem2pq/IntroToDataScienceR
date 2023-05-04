@@ -1,0 +1,73 @@
+---
+title: "Noah Data Vis"
+author: "NM"
+date: "4/19/2021"
+output: html_document
+---
+```{r}
+library(ggplot2)
+library(dplyr)
+library(RColorBrewer)
+HeartFailure<- read.csv("/Users/noahmcintire/Downloads/heart_failure_clinical_records_dataset(1).csv")
+HeartFailure <- HeartFailure%>%
+  mutate(anaemia=ifelse(anaemia==1,"anaemic","non-anaemic"))%>%
+  mutate(diabetes=ifelse(diabetes==1,"diabetic","non-diabetic"))%>%
+  mutate(high_blood_pressure=ifelse(high_blood_pressure==1,"high blood pressure","normal blood pressure"))%>%
+  mutate(sex=ifelse(sex==1,"male","female"))%>%
+  mutate(smoking=ifelse(smoking==1,"smoker","non-smoker"))%>%
+  mutate(DEATH_EVENT=ifelse(DEATH_EVENT==1,"died","did not die"))
+head(HeartFailure)
+```
+
+# Boxplot 1
+```{r}
+ggplot(HeartFailure, aes(x=DEATH_EVENT, y=ejection_fraction))+
+  geom_boxplot(fill= "#127ebe", color= "#fc5a1c")+theme(plot.title = element_text(hjust = 0.5))+
+  labs(x= "Death Event", y= "Ejection Fraction", title="Ejection Fraction of Individuals that Did and Did Not Die")
+```
+
+# Boxplot 2
+```{r}
+ggplot(HeartFailure, aes(x=DEATH_EVENT, y=serum_creatinine))+
+  geom_boxplot(fill= "#127ebe", color= "#fc5a1c")+theme(plot.title = element_text(hjust = 0.5))+
+  labs(x= "Death Event", y= "Serum Creatinine", title="Serum Creatinine of Individuals that Did and Did Not Die")
+```
+
+# Boxplot 3
+```{r}
+ggplot(HeartFailure, aes(x=DEATH_EVENT, y=time
+))+
+  geom_boxplot(fill= "#127ebe", color= "#fc5a1c")+theme(plot.title = element_text(hjust = 0.5))+
+  labs(x= "Death Event", y= "Time", title="Time until Check in on Individuals that Did and Did Not Die")
+```
+# Boxplot 4
+```{r}
+ggplot(HeartFailure, aes(x=DEATH_EVENT, y=age))+
+  geom_boxplot(fill= "#127ebe", color= "#fc5a1c")+theme(plot.title = element_text(hjust = 0.5))+
+  labs(x= "Death Event", y= "Age", title="Ages of Individuals that Did and Did Not Die")
+```
+# Boxplot 5
+```{r}
+ggplot(HeartFailure, aes(x=sex, y=platelets))+
+  geom_boxplot(fill= "#127ebe", color= "#fc5a1c")+theme(plot.title = element_text(hjust = 0.5))+
+  labs(x= "Sex", y= "Platelets", title="Platelet Levels of Individuals by Sex")
+```
+# Scatterplot 1
+```{r}
+ggplot(HeartFailure, aes(x=age, y=ejection_fraction))+
+  geom_point(color= "#fc5a1c")+theme(plot.title = element_text(hjust = 0.5))+
+  labs(x= "Age", y= "Ejection Fraction", title="Ejection Fraction and Age of Indiviauls")
+```
+
+#Scatterplot 2
+```{r}
+ggplot(HeartFailure, aes(x=serum_creatinine, y=age))+
+  geom_point(color= "#127ebe")+theme(plot.title = element_text(hjust = 0.5))+
+  labs(x= "Serum Creatinine", y= "Age", title="Serum Creatinine and Age of Individuals")
+```
+#Scatterplot 3
+```{r}
+ggplot(HeartFailure, aes(x=ejection_fraction, y=serum_sodium))+
+  geom_point(color= "#127ebe")+theme(plot.title = element_text(hjust = 0.5))+
+  labs(x= "Ejection Fraction", y= "Serum Sodium", title="Individuals Ejection Fraction and Serum Sodium")
+```

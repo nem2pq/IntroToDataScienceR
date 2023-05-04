@@ -1,0 +1,54 @@
+---
+title: "Homework 6"
+author: "NM"
+date: "4/6/2021"
+output: html_document
+---
+```{r}
+library(ggplot2)
+library(dplyr)
+library(RColorBrewer)
+Police.Victims<- read.csv("/Users/noahmcintire/Downloads/PoliceKillings(1).csv")
+View(Police.Victims)
+```
+
+# Question 1
+```{r}
+perc<-Police.Victims%>%
+  group_by(raceethnicity)%>%
+  summarise(Counts=n())%>%
+  mutate(Percentage=(Counts/nrow(Police.Victims)*100))
+ggplot(perc, aes(x=raceethnicity,y=Percentage))+geom_col(fill=brewer.pal(6,"PuRd"))
+```
+This visualization, in conjunction with the US Census Bureau population estimates shows that eeven though Black individuals make up only 13.4% of the US population, they are almost 30% of all police killings, while white americans are 76% of the population and only account for 50% of the people killed by police.
+
+# Question 2
+```{r}
+new_pv<-Police.Victims%>%
+  mutate(Age=as.numeric(age), POV=as.numeric(pov))
+```
+# Question 3
+```{r}
+ggplot(new_pv, aes(x=Age))+geom_histogram(fill="turquoise",color="black")+  theme(axis.text.x = element_text(angle = 90),plot.title = element_text(hjust = 0.5))+
+  labs(x="Age of Victims", y="Number of Victims", title="Distribution of age of victims")
+```
+The above graph shows that most of the victims of police killings happen to those younger than 50. The graph provides a visualization of what age groups have been killed more by police, with those aged between 25 and 40 being the most common.
+# Question 4
+```{r}
+ggplot(new_pv, aes(x=raceethnicity, y=POV))+
+  geom_boxplot(fill=brewer.pal(6,"Set2"))+
+  labs(x="Race Ethnicity", y="Poverty Rate")
+```
+
+# Question 5
+```{r}
+ggplot(new_pv, aes(x=cause, fill=raceethnicity))+geom_bar(position="stack")
+```
+This graph demonstrates that the race of a victim is independent of the cause of death, as there is no correlation between any race and their cause of death.
+
+# Question 6
+
+```{r}
+ggplot(new_pv, aes(x=Age, y=POV))+geom_point(alpha=0.4, color="tomato")
+```
+

@@ -1,0 +1,68 @@
+---
+title: "Homework4"
+author: "NM"
+date: "3/10/2021"
+output: html_document
+---
+```{r}
+library(dplyr)
+Our_Data <- read.csv("/Users/noahmcintire/Downloads/Spring 21_ Class Data.csv")
+```
+
+# Question 1
+```{r}
+Our_Data1<-Our_Data%>%
+  rename(Vacinne=Vaccine)
+glimpse(Our_Data1)
+```
+
+# Question 2
+```{r}
+Our_Data2<-Our_Data1%>%select(YearUVa, SleepHrs, FavSport, age, NumMasks, Vacinne, NumCourses)
+```
+
+# Question 3
+```{r}
+Our_Data2%>%
+  summarise(mean(age,na.rm = T), median(age, na.rm = T), mean(NumMasks, na.rm = T), median(NumMasks, na.rm = T))
+```
+Median is a better measure for the NumMasks variable, as there is obviously several ourlies bringing the mean up to almost double that of the median. The median eliminates the pull of these outlies as a measure of center
+
+# Question 4
+```{r}
+Our_Data2%>%
+group_by(YearUVa)%>%
+summarize(Mean_age=mean(age,na.rm = T), Mean_sleep_hrs=mean(SleepHrs,na.rm = T))
+```
+
+# Question 5
+```{r}
+Our_Data2%>%
+group_by(Vacinne)%>%
+summarise(Num_maks_med=median(NumMasks, na.rm = T))
+```
+
+# Question 6
+```{r}
+Our_Data2%>%
+  filter(SleepHrs>=8)%>%
+  summarise(Num_courses_mean=mean(NumCourses, na.rm = T))
+```
+
+# Question 7
+```{r}
+Year_one_four<-Our_Data2%>%
+  filter(YearUVa== "First" | YearUVa== "Fourth")%>%
+  filter(FavSport== "Soccer" | FavSport== "Basketball")
+Year_one_four%>%
+  select(YearUVa, FavSport)%>%
+  table()
+```
+
+# Question 8
+```{r}
+New_Data<-Our_Data2%>%
+  mutate(age.in.wks=age*52.14)
+head(New_Data, 8)
+```
+

@@ -1,0 +1,70 @@
+---
+title: "Homework7"
+author: "NM"
+date: "4/11/2021"
+output: html_document
+---
+
+# Question 1
+
+```{r}
+library(ggplot2)
+library(dplyr)
+library(RColorBrewer)
+RC<- read.csv("/Users/noahmcintire/Downloads/RollerCoasterData.csv")
+```
+
+Part A
+
+```{r}
+ggplot(RC, aes(x=Height, y=Speed, size=age, color=Type))+
+  geom_point(alpha=0.5)+scale_size(range = c(0.1,12))
+```
+
+Part B
+a.
+```{r}
+TSC<-RC %>%
+  group_by(State, Type)%>%
+  summarise(counts=n())
+```
+b.
+```{r}
+library(ggwordcloud)
+ggplot(TSC, aes(label=State,size=counts,color=Type))+
+  geom_text_wordcloud_area(rm_outside = TRUE)
+```
+
+# Question 2
+
+```{r}
+USCovid<-read.csv("/Users/noahmcintire/Downloads/USCountiesCovid(1).csv")
+Daily.Counts<-USCovid%>%
+  group_by(state,county)%>%
+  mutate(cases.by.day= c(cases[1],diff(cases)),deaths.by.day= c(deaths[1],diff(deaths)))
+
+```
+
+Part A
+```{r}
+VA.Counties<-Daily.Counts%>%
+  filter(date=="3/28/2021" | date=="3/27/2021" | date=="3/26/2021")%>%
+  filter(state=="Virginia")%>%
+  filter(county=="Fairfax" | county=="Loudoun" | county=="Richmond" | county=="Roanoke" | county=="Albemarle" | county=="Charlottesville city")
+```
+
+Part B
+```{r}
+ggplot(VA.Counties, aes(x=date, y=county, fill=cases.by.day))+geom_tile()
+```
+Part C
+```{r}
+ggplot(VA.Counties, aes(x=date, y=county, fill=deaths.by.day))+geom_tile()
+```
+
+Part D
+```{r}
+ggplot(VA.Counties, aes(x=date, y=cases.by.day, group=county, color=county))+
+  geom_line()
+```
+

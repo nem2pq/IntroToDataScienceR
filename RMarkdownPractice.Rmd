@@ -1,0 +1,45 @@
+---
+title: "Homework1"
+author: "NM"
+date: "2/11/2021"
+output: html_document
+---
+```{r}
+library(ggplot2)
+
+```
+
+# Question 1
+
+kjfal;
+
+# Question 2
+
+(a)
+
+(b)
+
+```{r}
+sqrt(9)
+
+3+3
+
+#PA
+```
+
+(c)
+
+```{r}
+add <- sum(2,5,7,9)
+print(add)
+```
+
+Interpretation: We are 95 persent confident that .......
+
+Question 3
+
+
+
+
+# Reference
+<https://uva.hosted.panopto.com/Panopto/Pages/Viewer.aspx?id=dff7b7e6-640c-4b2b-b78a-aca2011675eb>

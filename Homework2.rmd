@@ -1,0 +1,47 @@
+---
+title: "Homework 2"
+author: "NM"
+date: "2/21/2021"
+output: html_document
+---
+# Question 1
+(a)
+```{r}
+library(ggplot2)
+PK <- read.csv("/Users/noahmcintire/Downloads/PoliceKillings.csv")
+```
+(b)
+```{r}
+table(PK$raceethnicity)
+```
+# Question 2
+```{r}
+write.csv(mtcars,"/Users/noahmcintire/Documents/Spring 2021/Intro to Data Science in R/mtcars.csv" )
+```
+# Question 3
+Part A
+```{r}
+rep("Q1", each=4)
+```
+Part B
+```{r}
+seq(50, 100, 2.5)
+
+```
+Part C
+```{r}
+rep(2010:2017,each =4)
+```
+Part D
+```{r}
+rep(2016:2017,c(4,3))
+```
+Part E
+```{r}
+c(seq(1295,1300),seq(1299,1290))
+```
+Part F
+```{r}
+seq(4160,3530, -105)
+```
+

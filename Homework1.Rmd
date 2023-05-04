@@ -1,0 +1,53 @@
+---
+title: "Homework1"
+author: "NM"
+date: "2/11/2021"
+output: html_document
+---
+# Question 1
+
+(a)
+```{r}
+sum(5.5, 7, 5.5,6)
+```
+(b)
+```{r}
+(9 * ((3 +5)^3))/sqrt(10)
+```
+(c)
+```{r}
+(94.3*.35) + (86.1 *.2) + (88.5 *.2) + (83 * .25)
+```
+ The weighted average calculated from above suggests that the letter grade for this student would be a B+.
+ 
+# Question 2
+
+(a)F
+(b)F
+(c)F
+(d)F
+(e)T
+(f)F
+(g)F
+(h)T
+(i)T
+(j)T
+
+# Question 3
+
+```{r}
+library(nycflights13)
+flights
+```
+```{r}
+mean(flights$distance)
+```
+```{r}
+table(flights$origin)
+```
+
+# References
+
+No outside websites were used- just notes from lecture videos were used to complete this homework.
+
+

@@ -1,0 +1,56 @@
+---
+title: "Homework5"
+author: "NM"
+date: "3/14/2021"
+output: html_document
+---
+# Top 50 movies imdb
+
+```{r}
+library(rvest)
+library(dplyr)
+```
+
+```{r}
+top50moviespage<-"https://www.imdb.com/search/title/?groups=top_250&sort=user_rating"
+```
+
+```{r}
+top50movie<-read_html(top50moviespage)
+
+title<-top50movie%>%
+  html_nodes(".lister-item-header a")%>%
+  html_text()
+
+rank<-top50movie%>%
+  html_nodes(".text-primary")%>%
+  html_text()
+
+genre<-top50movie%>%
+  html_nodes(".genre")%>%
+  html_text()
+genre<-sub("\n", "", genre)
+
+rating<-top50movie%>%
+  html_nodes(".ratings-imdb-rating strong")%>%
+  html_text()
+
+runtime<-top50movie%>%
+  html_nodes(".runtime")%>%
+  html_text()
+
+certificate<-top50movie%>%
+  html_nodes(".certificate")%>%
+  html_text()
+
+votes<-top50movie%>%
+  html_nodes(".sort-num_votes-visible span:nth-child(2)")%>%
+  html_text()
+
+top50movies<-data.frame(rank, title, genre, rating, runtime, certificate, votes)
+
+head(top50movies, 6)
+
+```
+
+Used stack overflow to remove "\n" from the genre vector. https://stackoverflow.com/questions/35113553/r-remove-first-character-from-string/35113673

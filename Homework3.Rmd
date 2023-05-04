@@ -1,0 +1,68 @@
+---
+title: "Homework3"
+author: "NM"
+date: "3/1/2021"
+output: html_document
+---
+# Question 1
+```{r}
+library(ggplot2)
+USCovid <- read.csv("/Users/noahmcintire/Downloads/USCountiesCovid.csv")
+```
+
+# Question 2
+```{r}
+Revised.USCovid <- USCovid[-c(4)]
+```
+
+# Question 3
+```{r}
+Revised.USCovid <- Revised.USCovid[order(-Revised.USCovid$cases),]
+head(Revised.USCovid)
+```
+California and Los Angeles have largest cumulative number of coronavirus cases in the US.
+
+# Question 4
+```{r}
+deathRateCA = (18658/1159153)
+print(deathRateCA)
+```
+
+# Question 5
+```{r}
+Revised.USCovid <- Revised.USCovid[order(-Revised.USCovid$deaths),]
+head(Revised.USCovid)
+```
+New York and New York city have the largest number of cumulative deaths from coronavirus deaths out of all states and counties respectively.
+
+# Question 6
+```{r}
+deathRateNY = (28021/655228)
+print(deathRateNY)
+```
+
+# Question 7
+```{r}
+VA_Covid <-Revised.USCovid[which(Revised.USCovid$state=="Virginia"),]
+```
+
+# Question 8
+```{r}
+Va_Covid <- VA_Covid[order(-VA_Covid$cases),]
+head(VA_Covid)
+```
+```{r}
+deathRateFair = (826/62854)
+print(deathRateFair)
+```
+
+# Question 9
+```{r}
+Albemarle_Covid <- VA_Covid[which(VA_Covid$county=="Albemarle"), ]
+Cville_Covid <- VA_Covid[which(VA_Covid$county=="Charlottesville city"), ]
+AC_Covid <- rbind(Albemarle_Covid,Cville_Covid)
+AC_Covid <- AC_Covid[order(-AC_Covid$deaths),]
+head(AC_Covid)
+aggregate(AC_Covid[,5], list(AC_Covid$county),max)
+```
+
